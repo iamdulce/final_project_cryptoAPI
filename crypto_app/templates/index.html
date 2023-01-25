@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block section %}
+<h3>History</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>From</th>
+            <th>Quantity</th>
+            <th>To</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movements in data %}
+        <tr>
+            <td>{{movements.date}}</td>
+            <td>{{movements.time}}</td>
+            <td>{{movements.from_coin}}</td>
+            <td>{{movements.from_quantity}}€</td>
+            <td>{{movements.to_coin}}</td>
+            <td>{{movements.to_quantity}}€</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
