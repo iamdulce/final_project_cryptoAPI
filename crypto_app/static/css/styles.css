@@ -12,3 +12,21 @@ body {
     grid-template-rows: auto 50px 1fr auto;
     margin: 0;
 }
+
+/*Fix media queries for mobile*/
+.coins_form {
+    display: grid;
+    grid-area: c-left c-right;
+    grid-template-columns: auto auto;
+    grid-gap: 1em;
+}
+
+.status_table {
+    margin: auto;
+    width: 50vw;
+}
+
+.status_button {
+    display: flex;
+    justify-content: space-around;
+}
