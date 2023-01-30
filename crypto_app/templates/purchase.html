@@ -1,24 +1,29 @@
 {% extends "base.html" %} {% block section %}
 <h3>New transaction</h3>
 
-<form action="/purchase" id="coins_form" class="coins_form">
+<form action="/purchase" method="post" id="coins_form" class="coins_form">
     <fieldset class="c-left">
         <label for="from_coin">From</label>
         <select name="from_coin" form="coins_form">
-            <option value="EUR">EUR</option>
-            <option value="ETH">ETH</option>
-            <option value="BNB">BNB</option>
-            <option value="ADA">ADA</option>
-            <option value="DOT">DOT</option>
-            <option value="BTC">BTC</option>
-            <option value="USDT">USDT</option>
-            <option value="XRP">XRP</option>
-            <option value="SOL">SOL</option>
-            <option value="MATIC">MATIC</option>
+            <option value="{{dataForm.from_coin}}">EUR</option>
+            <option value="{{dataForm.from_coin}}">ETH</option>
+            <option value="{{dataForm.from_coin}}">BNB</option>
+            <option value="{{dataForm.from_coin}}">ADA</option>
+            <option value="{{dataForm.from_coin}}">DOT</option>
+            <option value="{{dataForm.from_coin}}">BTC</option>
+            <option value="{{dataForm.from_coin}}">USDT</option>
+            <option value="{{dataForm.from_coin}}">XRP</option>
+            <option value="{{dataForm.from_coin}}">SOL</option>
+            <option value="{{dataForm.from_coin}}">MATIC</option>
         </select>
 
         <label for="from_quantity">Q:</label>
-        <input type="number" id="from_quantity" name="from_quantity" />
+        <input
+            type="number"
+            id="from_quantity"
+            name="from_quantity"
+            value="{{dataForm.from_quantity}}"
+        />
 
         <a href="" type="submit">
             <span class="material-symbols-outlined"> calculate </span>
@@ -28,20 +33,25 @@
     <fieldset class="c-right">
         <label for="to_coin">To:</label>
         <select name="to_coin" form="coins_form">
-            <option value="EUR">EUR</option>
-            <option value="ETH">ETH</option>
-            <option value="BNB">BNB</option>
-            <option value="ADA">ADA</option>
-            <option value="DOT">DOT</option>
-            <option value="BTC">BTC</option>
-            <option value="USDT">USDT</option>
-            <option value="XRP">XRP</option>
-            <option value="SOL">SOL</option>
-            <option value="MATIC">MATIC</option>
+            <option value="{{dataForm.to_coin}}">EUR</option>
+            <option value="{{dataForm.to_coin}}">ETH</option>
+            <option value="{{dataForm.to_coin}}">BNB</option>
+            <option value="{{dataForm.to_coin}}">ADA</option>
+            <option value="{{dataForm.to_coin}}">DOT</option>
+            <option value="{{dataForm.to_coin}}">BTC</option>
+            <option value="{{dataForm.to_coin}}">USDT</option>
+            <option value="{{dataForm.to_coin}}">XRP</option>
+            <option value="{{dataForm.to_coin}}">SOL</option>
+            <option value="{{dataForm.to_coin}}">MATIC</option>
         </select>
 
         <label for="to_quantity">Q:</label>
-        <input type="number" id="to_quantity" name="to_quantity" />
+        <input
+            type="number"
+            id="to_quantity"
+            name="to_quantity"
+            value="{{dataForm.to_quantity}}"
+        />
 
         <label for="unit_price">U.P:</label>
         <input type="number" id="unit_price" />
