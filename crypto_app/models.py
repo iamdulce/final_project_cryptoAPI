@@ -1,34 +1,11 @@
 import requests
-#import sqlite3
-#from crypto_app.conexion_bbdd import *
-from datetime import date
+from config import *
+from crypto_app.conexion_bbdd import *
 
 
-
-
-#- PROBANDO LLAMADA A API -
-time = date.today() # Cómo obtengo esto en el form?
-base = "EUR"
-quote = "BTC"
-API_KEY = "8B30787E-E140-44C4-B21A-E093FB2DAE75"
-
-r = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{base}/{quote}?time={time}&apikey={API_KEY}')
-coin_data = r.json()
-
-if r.status_code == 200:
-    print(coin_data['asset_id_base'])
-    print(coin_data['asset_id_quote'])
-    print(coin_data['time'])
-    print(coin_data['rate'])
-else: 
-    raise Exception( f'Call assets failed:{r.status_code}')
-
-# Falta agregar a la URL después de ?: time={self.time}&
-
-'''
+# Debería mover la clase a otro archivo aparte?
 class ModelError(Exception):
     pass
-
 
 class CoinsApi:
     def __init__(self):
@@ -41,6 +18,7 @@ class CoinsApi:
 
     def getCoinData(self, apiKey):
         self.r = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{self.base}/{self.quote}?apikey={apiKey}')
+        # Falta agregar a la URL después de ?: time={self.time}&
         self.coin_data = self.r.json()
 
         if self.r.status_code == 200:
@@ -50,4 +28,25 @@ class CoinsApi:
             self.rate = self.coin_data['rate']
         else:
             raise ModelError( f'Call assets failed:{self.r.status_code}')
-'''
+
+def show_all():
+    connect = Conexion("SELECT id,date,time,from_coin,from_quantity,to_coin,to_quantity FROM movements ORDER BY date;")
+    rows = connect.res.fetchall()
+    columns = connect.res.description
+
+    result = []
+    for row in rows:
+        data_info = {}
+        position = 0
+
+        for field in columns:
+            data_info[field[0]] = row[position]
+            position += 1
+        result.append(data_info)
+
+    connect.con.close()
+
+    return result
+
+def new_transaction():
+    pass
