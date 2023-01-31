@@ -1,12 +1,12 @@
 import requests
 #import sqlite3
 #from crypto_app.conexion_bbdd import *
-#from datetime import date
+from datetime import date
 
 
 
-'''
-- PROBANDO LLAMADA A API -
+
+#- PROBANDO LLAMADA A API -
 time = date.today() # Cómo obtengo esto en el form?
 base = "EUR"
 quote = "BTC"
@@ -22,30 +22,32 @@ if r.status_code == 200:
     print(coin_data['rate'])
 else: 
     raise Exception( f'Call assets failed:{r.status_code}')
+
+# Falta agregar a la URL después de ?: time={self.time}&
+
 '''
-
-
 class ModelError(Exception):
     pass
 
 
 class CoinsApi:
     def __init__(self):
+        self.coin_data = None
         self.base = None
         self.quote = None
         self.time = None
         self.rate = None
         self.r = None
 
-    def coinData(self, apiKey):
-        self.r = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{self.base}/{self.quote}?time={self.time}&apikey={apiKey}')
-        coin_data = self.r.json()
+    def getCoinData(self, apiKey):
+        self.r = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{self.base}/{self.quote}?apikey={apiKey}')
+        self.coin_data = self.r.json()
 
         if self.r.status_code == 200:
-            self.base = coin_data['asset_id_base']
-            self.quote = coin_data['asset_id_quote']
-            self.time = coin_data['time']
-            self.rate = coin_data['rate']
+            self.base = self.coin_data['asset_id_base']
+            self.quote = self.coin_data['asset_id_quote']
+            self.time = self.coin_data['time']
+            self.rate = self.coin_data['rate']
         else:
             raise ModelError( f'Call assets failed:{self.r.status_code}')
-
+'''
