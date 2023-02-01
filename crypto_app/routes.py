@@ -3,7 +3,6 @@ from flask import render_template, request
 from config import *
 from datetime import datetime, date
 from crypto_app.models import *
-import requests
 
 
 @app.route("/")
@@ -14,40 +13,31 @@ def index():
 @app.route("/purchase", methods = ["GET", "POST"])
 def purchase():
     if request.method == "GET":
-        return render_template("purchase.html", dataForm = {})
+        return render_template("purchase.html", data = {})
 
     else:
-        print("Lo que recibo desde el form: ", request.form)
-        
         if 'calculate' in request.form:
-            while request.form['from_quantity'] != '' and request.form['from_coin'] and request.form['to_coin']:
-             #WHILE INCOMPLETO: para validación de datos
-             #CREAR CLASE o FUNCIÓN Y LLEVAR A MODELS para llamada a API
-                time = date.today()
-                base = request.form['from_coin']
-                quote = request.form['to_coin']
+            from_coin = request.form['from_coin']
+            from_quantity= float(request.form['from_quantity'])
+            to_coin= request.form['to_coin']
+            coin_rate = api_call(from_coin, to_coin)
+            to_quantity = coin_rate * from_quantity
 
-                r = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{base}/{quote}?time={time}&apikey={API_KEY}')
-                coin_data = r.json()
+                    
+            list_request = {
+                'from_coin': from_coin,
+                'from_quantity': from_quantity,
+                'to_coin': to_coin,
+                'to_quantity': to_quantity,
+                'unit_price': coin_rate,
+                }
 
-                if r.status_code == 200:
-                    print(coin_data['rate'])
+            print("Lo que recibo desde el form: ", list_request)
+        
+            return render_template("purchase.html", data = list_request)
 
-                    '''
-                    from_quantity = request.form['from_quantity']
-                    from_coin = coin_data['asset_id_base']
-                    to_coin = coin_data['asset_id_quote']
-                    unit_price = coin_data['rate']
-                    to_quantity = float(from_quantity) * float(unit_price)
-                    '''
-
-                else: 
-                    raise Exception( f'Call assets failed:{r.status_code}')
-                break
-            return render_template("purchase.html", dataForm = request.form,)
-
-        else:
-            pass #AQUÍ GUARDO EN BBDD
+        if 'buy' in request.form:
+            return "guardar en bbdd"
 
 
 

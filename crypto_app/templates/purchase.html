@@ -4,7 +4,7 @@
 <form action="/purchase" method="post" id="coins_form" class="coins_form">
     <fieldset class="c-left">
         <label for="from_coin">From</label>
-        <select name="from_coin" form="coins_form" value={{dataForm.from_coin}}>
+        <select name="from_coin" form="coins_form" value={{data.from_coin}}>
             <option selected disabled>--Select a coin--</option>
             <option value="EUR">EUR</option>
             <option value="ETH">ETH</option>
@@ -19,16 +19,16 @@
         </select>
 
         <label for="from_quantity">Q:</label>
-        <input type="number" name="from_quantity" placeholder = "Enter amount" id="from_quantity" step=" 0.01"  />
+        <input type="number" id="from_quantity" name="from_quantity" value={{data.from_quantity}} placeholder ="Enter amount" step="0.01">
 
-        <button type="submit" name="calculate" id="calculate_button" class="calculate_button"">
+        <button type="submit" id="calculate_button" name="calculate"  class="calculate_button"">
             <span class="material-symbols-outlined"> calculate </span>
         </button>
     </fieldset>
 
     <fieldset class="c-right">
         <label for="to_coin">To:</label>
-        <select name="to_coin" form="coins_form" value={{dataForm.to_coin}}>
+        <select name="to_coin" form="coins_form" value={{data.to_coin}}>
             <option selected disabled>--Select a coin--</option>
             <option value="EUR">EUR</option>
             <option value="ETH">ETH</option>
@@ -43,12 +43,12 @@
         </select>
 
         <label for="to_quantity">Q:</label>
-        <input type="number" id="to_quantity" name="to_quantity" readonly value={{dataForm.to_quantity}}/>
+        <input type"" id="to_quantity" name="to_quantity" readonly value={{data.to_quantity}}>
 
         <label for="unit_price">U.P:</label>
-        <input type="number" id="unit_price" name="unit_price" readonly value={{dataForm.unit_price}}/>
+        <input type="" id="unit_price" name="unit_price" readonly value={{data.unit_price}}>
 
-        <button type="submit" name="buy">Buy</button>
+        <button type="submit" id="buy_button" name="buy">Buy</button>
     </fieldset>
 </form>
 {% endblock %}
