@@ -13,14 +13,17 @@ body {
     margin: 0;
 }
 
-/*Fix media queries for mobile*/
-.coins_form {
-    display: grid;
-    grid-area: c-left c-right;
-    grid-template-columns: auto auto;
-    grid-gap: 1em;
+/*Purchase page*/
+.calculate_button {
+    display: flex;
+    justify-content: center;
+    width: 25px;
+    padding: 0;
+    margin: auto;
+    grid-area: calc-button;
 }
 
+/*Status page*/
 .status_table {
     margin: auto;
     width: 50vw;
@@ -29,12 +32,4 @@ body {
 .status_button {
     display: flex;
     justify-content: space-around;
-}
-
-.calculate_button {
-    display: flex;
-    justify-content: center;
-    width: 25px;
-    padding: 0;
-    margin: auto;
 }

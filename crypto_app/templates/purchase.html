@@ -2,53 +2,50 @@
 <h3>New transaction</h3>
 
 <form action="/purchase" method="post" id="coins_form" class="coins_form">
-    <fieldset class="c-left">
-        <label for="from_coin">From</label>
-        <select name="from_coin" form="coins_form" value={{data.from_coin}}>
-            <option selected disabled>--Select a coin--</option>
-            <option value="EUR">EUR</option>
-            <option value="ETH">ETH</option>
-            <option value="BNB">BNB</option>
-            <option value="ADA">ADA</option>
-            <option value="DOT">DOT</option>
-            <option value="BTC">BTC</option>
-            <option value="USDT">USDT</option>
-            <option value="XRP">XRP</option>
-            <option value="SOL">SOL</option>
-            <option value="MATIC">MATIC</option>
-        </select>
+    <label for="from_coin">From</label>
+    <select name="from_coin" form="coins_form" value={{data.from_coin}}>
+        <option selected disabled>--Select a coin--</option>
+        <option {% if data.from_coin == "EUR" %} selected {% endif %}>EUR</option>
+        <option {% if data.from_coin == "ETH" %} selected {% endif %}>ETH</option>
+        <option {% if data.from_coin == "BNB" %} selected {% endif %}>BNB</option>
+        <option {% if data.from_coin == "ADA" %} selected {% endif %}>ADA</option>
+        <option {% if data.from_coin == "DOT" %} selected {% endif %}>DOT</option>
+        <option {% if data.from_coin == "BTC" %} selected {% endif %}>BTC</option>
+        <option {% if data.from_coin == "USDT" %} selected {% endif %}>USDT</option>
+        <option {% if data.from_coin == "XRP" %} selected {% endif %}>XRP</option>
+        <option {% if data.from_coin == "SOL" %} selected {% endif %}>SOL</option>
+        <option {% if data.from_coin == "MATIC" %} selected {% endif %}>MATIC</option>
+    </select>
 
-        <label for="from_quantity">Q:</label>
-        <input type="number" id="from_quantity" name="from_quantity" value={{data.from_quantity}} placeholder ="Enter amount" step="0.01">
+    <label for="from_quantity">F.Q:</label>
+    <input type="number" id="from_quantity" name="from_quantity" value={{data.from_quantity}} placeholder ="Enter amount" step="0.01">
+    
+    <label for="to_coin">To:</label>
+    <select name="to_coin" form="coins_form" value={{data.to_coin}}>
+        <option selected disabled>--Select a coin--</option>
+        <option {% if data.to_coin == "EUR" %} selected {% endif %}>EUR</option>
+        <option {% if data.to_coin == "ETH" %} selected {% endif %}>ETH</option>
+        <option {% if data.to_coin == "BNB" %} selected {% endif %}>BNB</option>
+        <option {% if data.to_coin == "ADA" %} selected {% endif %}>ADA</option>
+        <option {% if data.to_coin == "DOT" %} selected {% endif %}>DOT</option>
+        <option {% if data.to_coin == "BTC" %} selected {% endif %}>BTC</option>
+        <option {% if data.to_coin == "USDT" %} selected {% endif %}>USDT</option>
+        <option {% if data.to_coin == "XRP" %} selected {% endif %}>XRP</option>
+        <option {% if data.to_coin == "SOL" %} selected {% endif %}>SOL</option>
+        <option {% if data.to_coin == "MATIC" %} selected {% endif %}>MATIC</option>
+    </select>
 
-        <button type="submit" id="calculate_button" name="calculate"  class="calculate_button"">
-            <span class="material-symbols-outlined"> calculate </span>
-        </button>
-    </fieldset>
+    <button type="submit" id="calculate_button" name="calculate"  class="calculate_button"">
+        <span class="material-symbols-outlined"> calculate </span>
+    </button>
 
-    <fieldset class="c-right">
-        <label for="to_coin">To:</label>
-        <select name="to_coin" form="coins_form" value={{data.to_coin}}>
-            <option selected disabled>--Select a coin--</option>
-            <option value="EUR">EUR</option>
-            <option value="ETH">ETH</option>
-            <option value="BNB">BNB</option>
-            <option value="ADA">ADA</option>
-            <option value="DOT">DOT</option>
-            <option value="BTC">BTC</option>
-            <option value="USDT">USDT</option>
-            <option value="XRP">XRP</option>
-            <option value="SOL">SOL</option>
-            <option value="MATIC">MATIC</option>
-        </select>
+    <label for="to_quantity">T.Q:</label>
+    <input type"" id="to_quantity" name="to_quantity" readonly value={{data.to_quantity}}>
 
-        <label for="to_quantity">Q:</label>
-        <input type"" id="to_quantity" name="to_quantity" readonly value={{data.to_quantity}}>
+    <label for="unit_price">U.P:</label>
+    <input type="" id="unit_price" name="unit_price" readonly value={{data.unit_price}}>
 
-        <label for="unit_price">U.P:</label>
-        <input type="" id="unit_price" name="unit_price" readonly value={{data.unit_price}}>
+    <button type="submit" id="buy_button" name="buy">Buy</button>
 
-        <button type="submit" id="buy_button" name="buy">Buy</button>
-    </fieldset>
 </form>
 {% endblock %}

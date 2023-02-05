@@ -18,7 +18,9 @@
         </header>
         <nav class="container">
             <ul>
-                <li><a href="/">Home</a></li>
+                <li>
+                    <a {% if href=="/" %} disabled {% endif %}>Home</a>
+                </li>
                 <li><a href="/purchase">Purchase</a></li>
                 <li><a href="/status">Status</a></li>
             </ul>

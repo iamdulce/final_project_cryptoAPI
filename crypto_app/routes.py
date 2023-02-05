@@ -1,8 +1,9 @@
 from crypto_app import app
-from flask import render_template, request
+from flask import render_template, request, redirect
 from config import *
 from datetime import datetime, date
 from crypto_app.models import *
+from crypto_app.forms import *
 
 
 @app.route("/")
@@ -37,10 +38,21 @@ def purchase():
             return render_template("purchase.html", data = list_request)
 
         if 'buy' in request.form:
-            return "guardar en bbdd"
 
+            time = datetime.now()
+            
+            new_transaction([
+                date.today(),
+                time.strftime("%H:%M:%S"),
+                request.form['from_coin'],
+                request.form['from_quantity'],
+                request.form['to_coin'],
+                request.form['to_quantity'],
+            ])
+
+            return redirect('/')
 
 
 @app.route("/status")
 def status():
-    return render_template("status.html")
+    return render_template("status.html", money_invested = invested(), money_recovered = recovered())

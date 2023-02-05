@@ -34,5 +34,23 @@ def show_all():
     return result
 
 
-def new_transaction():
-    pass
+def new_transaction(newRegister):
+    connectNew= Conexion("INSERT INTO movements(date,time,from_coin,from_quantity,to_coin,to_quantity) VALUES(?,?,?,?,?,?)",newRegister)
+    connectNew.con.commit()
+    connectNew.con.close()
+
+
+def invested():
+    connectInvested = Conexion("SELECT sum(from_quantity) FROM movements WHERE from_coin is 'EUR'")
+    result = connectInvested.res.fetchall()
+    connectInvested.con.close()
+
+    return result[0][0]
+
+
+def recovered():
+    connectRecovered = Conexion("SELECT sum(to_quantity) FROM movements WHERE to_coin is 'EUR'")
+    result = connectRecovered.res.fetchall()
+    connectRecovered.con.close()
+
+    return result[0][0]
