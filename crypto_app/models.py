@@ -46,6 +46,7 @@ def sumFromCoin(coin):
     result = connectSumfc.res.fetchall()
     connectSumfc.con.close()
 
+    print(result)
     return result[0][0]
 
 
@@ -54,4 +55,5 @@ def sumToCoin(coin):
     result = connectSumtc.res.fetchall()
     connectSumtc.con.close()
 
+    print(type(result))
     return result[0][0]

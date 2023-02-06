@@ -24,6 +24,20 @@ def purchase():
             coin_rate = api_call(from_coin, to_coin)
             to_quantity = coin_rate * from_quantity
 
+            
+            while from_coin != 'EUR':
+                sum_to_coin = sumToCoin(to_coin)
+                sum_from_coin = sumFromCoin(from_coin)
+                balance = sum_to_coin - sum_from_coin
+                print('this is toC: ', sum_to_coin)
+                print('this is fromC: ', sum_from_coin)
+                print('balance is: ', balance)
+
+                if from_quantity < balance:
+                    print(f"You have enough {from_coin} to sell/trade. Current value: {sum_from_coin}")
+                break
+
+          
                     
             list_request = {
                 'from_coin': from_coin,
