@@ -16,17 +16,7 @@
         <header>
             <div class="container">My Crypto</div>
         </header>
-        <nav class="container">
-            <ul>
-                <li>
-                    <a {% if href=="/" %} disabled {% endif %}>Home</a>
-                </li>
-                <li><a href="/purchase">Purchase</a></li>
-                <li><a href="/status">Status</a></li>
-            </ul>
-        </nav>
-
-        <section class="container">{% block section %} {% endblock %}</section>
+        {% block section %} {% endblock %}
 
         <footer>
             <div class="container">&copy; 2022 - DF</div>

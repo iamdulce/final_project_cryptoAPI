@@ -55,4 +55,8 @@ def purchase():
 
 @app.route("/status")
 def status():
-    return render_template("status.html", money_invested = invested(), money_recovered = recovered())
+    
+    from_coin = 'EUR'
+    to_coin = 'EUR'
+
+    return render_template("status.html", money_invested = sumFromCoin(from_coin), money_recovered = sumToCoin(to_coin))

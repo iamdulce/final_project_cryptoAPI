@@ -1,34 +1,45 @@
 {% extends "base.html" %} {% block section %}
-<h3>History</h3>
+<nav class="container">
+    <ul>
+        <li>
+            <a {% if href=="/" %} disabled {% endif %}>Home</a>
+        </li>
+        <li><a href="/purchase">Purchase</a></li>
+        <li><a href="/status">Status</a></li>
+    </ul>
+</nav>
 
-{% if data %}
+<section class="container">
+    <h3>History</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>From</th>
-            <th>Quantity</th>
-            <th>To</th>
-            <th>Quantity</th>
-            <th>Unit price</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for movements in data %}
-        <tr>
-            <td>{{movements.date}}</td>
-            <td>{{movements.time}}</td>
-            <td>{{movements.from_coin}}</td>
-            <td>{{movements.from_quantity}}€</td>
-            <td>{{movements.to_coin}}</td>
-            <td>{{movements.to_quantity}}</td>
-            <td>{{movements.from_quantity / movements.to_quantity}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<h4>No movements registered</h4>
-{% endif %} {% endblock %}
+    {% if data %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>From</th>
+                <th>Quantity</th>
+                <th>To</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movements in data %}
+            <tr>
+                <td>{{movements.date}}</td>
+                <td>{{movements.time}}</td>
+                <td>{{movements.from_coin}}</td>
+                <td>{{movements.from_quantity}}€</td>
+                <td>{{movements.to_coin}}</td>
+                <td>{{movements.to_quantity}}</td>
+                <td>{{movements.from_quantity / movements.to_quantity}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4>No movements registered</h4>
+</section>
+    {% endif %} {% endblock %}

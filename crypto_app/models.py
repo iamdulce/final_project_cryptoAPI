@@ -13,7 +13,7 @@ def api_call(base, quote):
     else: 
         raise Exception( f'Call assets failed:{call.status_code}')
 
-
+#Home function
 def show_all():
     connect = Conexion("SELECT id,date,time,from_coin,from_quantity,to_coin,to_quantity FROM movements ORDER BY date;")
     rows = connect.res.fetchall()
@@ -34,23 +34,24 @@ def show_all():
     return result
 
 
+#Purchase functions
 def new_transaction(newRegister):
     connectNew= Conexion("INSERT INTO movements(date,time,from_coin,from_quantity,to_coin,to_quantity) VALUES(?,?,?,?,?,?)",newRegister)
     connectNew.con.commit()
     connectNew.con.close()
 
 
-def invested():
-    connectInvested = Conexion("SELECT sum(from_quantity) FROM movements WHERE from_coin is 'EUR'")
-    result = connectInvested.res.fetchall()
-    connectInvested.con.close()
+def sumFromCoin(coin):
+    connectSumfc = Conexion(f"SELECT sum(from_quantity) FROM movements WHERE from_coin IS '{coin}'")
+    result = connectSumfc.res.fetchall()
+    connectSumfc.con.close()
 
     return result[0][0]
 
 
-def recovered():
-    connectRecovered = Conexion("SELECT sum(to_quantity) FROM movements WHERE to_coin is 'EUR'")
-    result = connectRecovered.res.fetchall()
-    connectRecovered.con.close()
+def sumToCoin(coin):
+    connectSumtc = Conexion(f"SELECT sum(to_quantity) FROM movements WHERE to_coin IS '{coin}'")
+    result = connectSumtc.res.fetchall()
+    connectSumtc.con.close()
 
     return result[0][0]
