@@ -16,21 +16,23 @@
             <th>Invested:</th>
             <td>{{money_invested}}</td>
         </tr>
+        
         <tr>
             <th>Recovered:</th>
             <td>{{money_recovered}}</td>
         </tr>
-    
+      
         <tr>
             <th>Purchase value:</th>
             <td>{{money_invested - money_recovered}}</td>
         </tr>
+
         <tr>
             <th>Current value</th>
             <td></td>
         </tr>
     </table>
-    
+  
     <a class="status_button" href="/">Return</a>
 </section>
 {% endblock %}

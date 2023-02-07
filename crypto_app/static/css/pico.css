@@ -217,7 +217,8 @@ kbd {
     --muted-color: hsl(205deg, 10%, 50%);
     --muted-border-color: hsl(205deg, 20%, 94%);
     --primary: hsl(195deg, 85%, 41%);
-    --primary-hover: hsl(195deg, 90%, 32%);
+    --my-primary: hsl(332, 41%, 32%);
+    --primary-hover: hsl(332, 40%, 59%);
     --primary-focus: rgba(16, 149, 193, 0.125);
     --primary-inverse: #fff;
     --secondary: hsl(205deg, 15%, 41%);
@@ -322,7 +323,8 @@ kbd {
         --muted-color: hsl(205deg, 10%, 50%);
         --muted-border-color: #1f2d38;
         --primary: hsl(195deg, 85%, 41%);
-        --primary-hover: hsl(195deg, 80%, 50%);
+        --my-primary: hsl(332, 41%, 32%);
+        --primary-hover: hsl(332, 40%, 59%);
         --primary-focus: rgba(16, 149, 193, 0.25);
         --primary-inverse: #fff;
         --secondary: hsl(205deg, 15%, 41%);
@@ -709,7 +711,7 @@ ul {
 
 a,
 [role="link"] {
-    --color: var(--primary);
+    --color: var(--my-primary);
     --background-color: transparent;
     outline: none;
     background-color: var(--background-color);
@@ -960,8 +962,8 @@ input[type="submit"],
 input[type="button"],
 input[type="reset"],
 [role="button"] {
-    --background-color: var(--primary);
-    --border-color: var(--primary);
+    --background-color: var(--my-primary);
+    --border-color: var(--my-primary);
     --color: var(--primary-inverse);
     --box-shadow: var(--button-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
     padding: var(--form-element-spacing-vertical)

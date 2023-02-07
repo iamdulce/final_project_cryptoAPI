@@ -3,8 +3,6 @@ from config import *
 from crypto_app.conexion_bbdd import *
 
 
-# Debería mover la clase a otro archivo aparte?
-
 def api_call(base, quote):
     call = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{base}/{quote}?&apikey={API_KEY}')
     coin_data = call.json()
@@ -42,18 +40,16 @@ def new_transaction(newRegister):
 
 
 def sumFromCoin(coin):
-    connectSumfc = Conexion(f"SELECT sum(from_quantity) FROM movements WHERE from_coin IS '{coin}'")
+    connectSumfc = Conexion(f"SELECT coalesce(sum(from_quantity),0) FROM movements WHERE from_coin IS'{coin}'")
     result = connectSumfc.res.fetchall()
     connectSumfc.con.close()
 
-    print(result)
     return result[0][0]
 
 
 def sumToCoin(coin):
-    connectSumtc = Conexion(f"SELECT sum(to_quantity) FROM movements WHERE to_coin IS '{coin}'")
+    connectSumtc = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE from_coin IS '{coin}'")
     result = connectSumtc.res.fetchall()
     connectSumtc.con.close()
 
-    print(type(result))
     return result[0][0]

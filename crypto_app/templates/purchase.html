@@ -58,5 +58,13 @@
         <button type="submit" id="buy_button" name="buy">Buy</button>
     
     </form>
+
+    <article>
+        <ul>
+            {%for item in alertError %}
+            <li class="error">{{item}}</li>
+            {% endfor %}
+        </ul>
+    </article>
 </section>
 {% endblock %}

@@ -11,6 +11,7 @@ def index():
     register = show_all()
     return render_template("index.html", data = register)
 
+'''
 @app.route("/purchase", methods = ["GET", "POST"])
 def purchase():
     if request.method == "GET":
@@ -25,20 +26,23 @@ def purchase():
             to_quantity = coin_rate * from_quantity
 
             
+          
             while from_coin != 'EUR':
-                sum_to_coin = sumToCoin(to_coin)
                 sum_from_coin = sumFromCoin(from_coin)
-                balance = sum_to_coin - sum_from_coin
-                print('this is toC: ', sum_to_coin)
-                print('this is fromC: ', sum_from_coin)
-                print('balance is: ', balance)
+                sum_to_coin = sumToCoin(to_coin)
 
-                if from_quantity < balance:
-                    print(f"You have enough {from_coin} to sell/trade. Current value: {sum_from_coin}")
+
+                if sum_from_coin == 0:
+                    print(f"You don't have {from_coin} available")
+                else:
+                    balance = sum_to_coin - sum_from_coin
+                    print('this is sum_fromC: ', sum_from_coin)
+                    print('this is sum_toC: ', sum_to_coin)
+                    print('balance is: ', balance)
+                    if from_quantity < balance:
+                        print(f"You don't have enough {from_coin} to sell/trade. Current value: {sum_from_coin}")
                 break
 
-          
-                    
             list_request = {
                 'from_coin': from_coin,
                 'from_quantity': from_quantity,
@@ -46,6 +50,7 @@ def purchase():
                 'to_quantity': to_quantity,
                 'unit_price': coin_rate,
                 }
+
 
             print("Lo que recibo desde el form: ", list_request)
         
@@ -65,12 +70,11 @@ def purchase():
             ])
 
             return redirect('/')
-
+'''
 
 @app.route("/status")
 def status():
-    
     from_coin = 'EUR'
     to_coin = 'EUR'
-
     return render_template("status.html", money_invested = sumFromCoin(from_coin), money_recovered = sumToCoin(to_coin))
+

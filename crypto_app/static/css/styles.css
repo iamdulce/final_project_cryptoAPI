@@ -1,6 +1,6 @@
 header,
 footer {
-    background-color: var(--primary);
+    background-color: var(--my-primary);
     color: var(--primary-inverse);
     font-size: 1.4em;
     font-weight: bold;
