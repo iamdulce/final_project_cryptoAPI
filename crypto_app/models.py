@@ -48,7 +48,7 @@ def sumFromCoin(coin):
 
 
 def sumToCoin(coin):
-    connectSumtc = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE from_coin IS '{coin}'")
+    connectSumtc = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE to_coin IS '{coin}'")
     result = connectSumtc.res.fetchall()
     connectSumtc.con.close()
 

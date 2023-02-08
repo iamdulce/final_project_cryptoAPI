@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../static/css/pico.css" />
+        <link rel="stylesheet" href="../static/css/pico-bootstrap-grid.css" />
         <link rel="stylesheet" href="../static/css/styles.css" />
         <link
             rel="stylesheet"
@@ -16,6 +16,23 @@
         <header>
             <div class="container">My Crypto</div>
         </header>
+        <nav class="container">
+            <ul>
+                {% if page == 'home' %}
+                <li>Home</li>
+                <li><a href="/purchase">Purchase</a></li>
+                <li><a href="/status">Status</a></li>
+                {% endif %} {% if page == 'purchase' %}
+                <li><a href="/">Home</a></li>
+                <li>Purchase</li>
+                <li><a href="/status">Status</a></li>
+                {% endif %} {% if page == 'status' %}
+                <li><a href="/">Home</a></li>
+                <li><a href="/purchase">Purchase</a></li>
+                <li>Status</li>
+                {% endif %}
+            </ul>
+        </nav>
         {% block section %} {% endblock %}
         <footer>
             <div class="container">&copy; 2022 - DF</div>

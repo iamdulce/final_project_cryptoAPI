@@ -1,14 +1,4 @@
 {% extends "base.html" %} {% block section %}
-<nav class="container">
-    <ul>
-        <li>
-            <a {% if href=="/" %} disabled {% endif %}>Home</a>
-        </li>
-        <li><a href="/purchase">Purchase</a></li>
-        <li><a href="/status">Status</a></li>
-    </ul>
-</nav>
-
 <section class="container">
     <h3>History</h3>
 
@@ -43,4 +33,4 @@
     <h4>No movements registered</h4>
     {% endif %}
 </section>
- {% endblock %}
+{% endblock %}

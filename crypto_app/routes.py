@@ -9,13 +9,13 @@ from crypto_app.forms import *
 @app.route("/")
 def index():
     register = show_all()
-    return render_template("index.html", data = register)
+    return render_template("index.html", data = register, page = 'home')
 
 '''
 @app.route("/purchase", methods = ["GET", "POST"])
 def purchase():
     if request.method == "GET":
-        return render_template("purchase.html", data = {})
+        return render_template("purchase.html", data = {}, page = 'purchase')
 
     else:
         if 'calculate' in request.form:
@@ -54,7 +54,7 @@ def purchase():
 
             print("Lo que recibo desde el form: ", list_request)
         
-            return render_template("purchase.html", data = list_request)
+            return render_template("purchase.html", data = list_request, page = 'purchase')
 
         if 'buy' in request.form:
 
@@ -76,5 +76,5 @@ def purchase():
 def status():
     from_coin = 'EUR'
     to_coin = 'EUR'
-    return render_template("status.html", money_invested = sumFromCoin(from_coin), money_recovered = sumToCoin(to_coin))
+    return render_template("status.html", page = 'status', money_invested = sumFromCoin(from_coin), money_recovered = sumToCoin(to_coin))
 
