@@ -3,7 +3,6 @@ from flask import render_template, request, redirect
 from config import *
 from datetime import datetime, date
 from crypto_app.models import *
-from crypto_app.forms import *
 
 
 @app.route("/")
@@ -11,11 +10,11 @@ def index():
     register = show_all()
     return render_template("index.html", data = register, page = 'home')
 
-'''
+
 @app.route("/purchase", methods = ["GET", "POST"])
 def purchase():
     if request.method == "GET":
-        return render_template("purchase.html", data = {}, page = 'purchase')
+        return render_template("purchase.html", page = 'purchase', data = {})
 
     else:
         if 'calculate' in request.form:
@@ -24,37 +23,23 @@ def purchase():
             to_coin= request.form['to_coin']
             coin_rate = api_call(from_coin, to_coin)
             to_quantity = coin_rate * from_quantity
-
             
-          
-            while from_coin != 'EUR':
-                sum_from_coin = sumFromCoin(from_coin)
-                sum_to_coin = sumToCoin(to_coin)
+            error = validateForm(from_quantity, from_coin)
 
-
-                if sum_from_coin == 0:
-                    print(f"You don't have {from_coin} available")
-                else:
-                    balance = sum_to_coin - sum_from_coin
-                    print('this is sum_fromC: ', sum_from_coin)
-                    print('this is sum_toC: ', sum_to_coin)
-                    print('balance is: ', balance)
-                    if from_quantity < balance:
-                        print(f"You don't have enough {from_coin} to sell/trade. Current value: {sum_from_coin}")
-                break
 
             list_request = {
-                'from_coin': from_coin,
-                'from_quantity': from_quantity,
-                'to_coin': to_coin,
-                'to_quantity': to_quantity,
-                'unit_price': coin_rate,
-                }
+                    'from_coin': from_coin,
+                    'from_quantity': from_quantity,
+                    'to_coin': to_coin,
+                    'to_quantity': to_quantity,
+                    'unit_price': coin_rate,
+                    }
 
-
-            print("Lo que recibo desde el form: ", list_request)
-        
-            return render_template("purchase.html", data = list_request, page = 'purchase')
+            if error:
+                print("Lo que recibo desde el form: ", list_request)
+                return render_template("purchase.html", page = 'purchase', alertError = error, data = {})
+            else:
+                return render_template("purchase.html", page = 'purchase', data = list_request)
 
         if 'buy' in request.form:
 
@@ -70,11 +55,13 @@ def purchase():
             ])
 
             return redirect('/')
-'''
+
 
 @app.route("/status")
 def status():
-    from_coin = 'EUR'
-    to_coin = 'EUR'
-    return render_template("status.html", page = 'status', money_invested = sumFromCoin(from_coin), money_recovered = sumToCoin(to_coin))
+    invested = investedMoney()
+    recovered = recoveredMoney()
+    current_value = 0
+
+    return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered)
 

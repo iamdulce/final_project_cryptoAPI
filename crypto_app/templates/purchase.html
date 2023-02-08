@@ -34,7 +34,7 @@
                 <option {% if data.to_coin == "MATIC" %} selected {% endif %}>MATIC</option>
             </select>
                 
-            <label for="from_quantity">F.Q:</label>
+            <label for="from_quantity">Money to invest:</label>
             <div class="box-form">
                 <input type="number" id="from_quantity" name="from_quantity" value={{data.from_quantity}} placeholder ="Enter amount" step="0.01" required>
                     
@@ -45,10 +45,10 @@
         </fieldset>
 
         <fieldset class="wrapper">
-            <label for="to_quantity">T.Q:</label>
+            <label for="to_quantity">Money to receive:</label>
             <input type"" id="to_quantity" name="to_quantity" readonly value={{data.to_quantity}}>
             
-            <label for="unit_price">U.P:</label>
+            <label for="unit_price">Unit price:</label>
             <input type="" id="unit_price" name="unit_price" readonly value={{data.unit_price}}>
             
             <button type="submit" id="buy_button" name="buy">Buy</button>

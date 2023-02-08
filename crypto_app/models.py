@@ -1,4 +1,5 @@
 import requests
+from flask import request
 from config import *
 from crypto_app.conexion_bbdd import *
 
@@ -11,7 +12,7 @@ def api_call(base, quote):
     else: 
         raise Exception( f'Call assets failed:{call.status_code}')
 
-#Home function
+
 def show_all():
     connect = Conexion("SELECT id,date,time,from_coin,from_quantity,to_coin,to_quantity FROM movements ORDER BY date;")
     rows = connect.res.fetchall()
@@ -32,24 +33,59 @@ def show_all():
     return result
 
 
-#Purchase functions
 def new_transaction(newRegister):
     connectNew= Conexion("INSERT INTO movements(date,time,from_coin,from_quantity,to_coin,to_quantity) VALUES(?,?,?,?,?,?)",newRegister)
     connectNew.con.commit()
     connectNew.con.close()
 
 
-def sumFromCoin(coin):
-    connectSumfc = Conexion(f"SELECT coalesce(sum(from_quantity),0) FROM movements WHERE from_coin IS'{coin}'")
-    result = connectSumfc.res.fetchall()
-    connectSumfc.con.close()
+def investedMoney():
+    connectInvested = Conexion(f"SELECT coalesce(sum(from_quantity),0) FROM movements WHERE from_coin IS 'EUR'")
+    result = connectInvested.res.fetchall()
+    connectInvested.con.close()
 
     return result[0][0]
 
 
-def sumToCoin(coin):
-    connectSumtc = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE to_coin IS '{coin}'")
-    result = connectSumtc.res.fetchall()
-    connectSumtc.con.close()
+def recoveredMoney():
+    connectRecovered = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE to_coin IS 'EUR'")
+    result = connectRecovered.res.fetchall()
+    connectRecovered.con.close()
 
+    return result[0][0]
+
+
+def crypto_balance(coin):
+    connectBalancel1 = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE to_coin IS '{coin}'")
+    connectBalance2 = Conexion(f"SELECT coalesce(sum(from_quantity),0) FROM movements WHERE from_coin IS '{coin}' AND (from_coin NOT LIKE 'EUR')")
+    result1 = connectBalancel1.res.fetchall()
+    result2 = connectBalance2.res.fetchall()
+    connectBalancel1.con.close()
+    connectBalance2.con.close()
+
+    balance = result1[0][0] - result2[0][0]
+    print(balance)
+    
+    return balance
+
+
+def validateForm(from_quantity, coin):
+    error=[]
+    to_coin= request.form['to_coin']
+    from_coin = request.form['from_coin']
+
+    if from_coin == to_coin:
+        error.append("You can't make transactions between the same coin")
+    if from_quantity > crypto_balance(coin):
+         error.append(f"You don't have enough {from_coin} to sell/trade. Current credit: {crypto_balance(coin)}")
+    
+    return error
+
+
+def purchased_coins():
+    connect = Conexion("SELECT DISTINCT to_coin FROM movements")
+    result = connect.res.fetchall()
+    connect.con.close()
+
+    print(result)
     return result[0][0]

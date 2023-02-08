@@ -3,25 +3,19 @@ from flask import render_template, request, redirect
 from config import *
 from datetime import datetime, date
 from crypto_app.models import *
-from crypto_app.forms import *
 
-
-def validateForm():
+'''
+def validateForm(from_quantity, coin):
     error=[]
-    from_coin = request.form['from_coin']
     to_coin= request.form['to_coin']
-    from_quantity = request.form['from_quantity']
-    
+    from_coin = request.form['from_coin']
+
+
     if from_coin == to_coin:
         error.append("You can't make transactions between the same coin")
-    if from_coin != 'EUR':
-        sum_from_coin = sumFromCoin(from_coin)
-        sum_to_coin = sumToCoin(to_coin)
-        balance = sum_to_coin - sum_from_coin
-        if sum_to_coin == 0:
-            error.append(f"You don't have {to_coin} available")
-        if float(from_quantity) < balance:
-            error.append(f"You don't have enough {from_coin} to sell/trade. Current value: {sum_to_coin}")
+    if from_quantity > crypto_total(coin):
+         error.append(f"You don't have enough {from_coin} to sell/trade. Current credit: {crypto_total(coin)}")
+    
     return error
 
 @app.route("/purchase", methods = ["GET", "POST"])
@@ -37,7 +31,7 @@ def purchase():
             coin_rate = api_call(from_coin, to_coin)
             to_quantity = coin_rate * from_quantity
             
-            error = validateForm()
+            error = validateForm(from_quantity, from_coin)
 
             list_request = {
                     'from_coin': from_coin,
@@ -68,3 +62,12 @@ def purchase():
             ])
 
             return redirect('/')
+'''
+
+@app.route("/status")
+def status():
+    invested = investedMoney()
+    recovered = recoveredMoney()
+    current_value = 0
+
+    return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered)
