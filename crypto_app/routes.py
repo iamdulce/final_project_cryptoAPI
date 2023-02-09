@@ -62,6 +62,16 @@ def status():
     invested = investedMoney()
     recovered = recoveredMoney()
     current_value = 0
+    coins_bbdd = purchased_coins()
 
-    return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered)
+    print("this is coins_bbdd", coins_bbdd)
 
+
+    for coin in coins_bbdd:
+        balance = crypto_balance(coin)
+        print('this is balance ', balance)
+        if balance > 0:
+            current_value += balance * api_call(coin, 'EUR')
+            print("this is current value ", current_value)
+
+    return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered, current_value = current_value)
