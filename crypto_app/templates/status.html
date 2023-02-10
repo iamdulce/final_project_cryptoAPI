@@ -2,7 +2,7 @@
 <section class="container">
     <h3>Investment status</h3>
 
-    <table class="status_table">
+    <table class="status_table" role="grid">
         <tr>
             <th>Invested:</th>
             <td>{{money_invested}}</td>
@@ -15,12 +15,21 @@
 
         <tr>
             <th>Purchase value:</th>
-            <td>{{money_invested - money_recovered}}</td>
+            <td>{{purchase_value}}</td>
         </tr>
 
         <tr>
-            <th>Current value</th>
+            <th>Current value:</th>
             <td>{{current_value}}</td>
+        </tr>
+
+        <tr>
+            <th>Profit/Loss Status</th>
+            {% if pl_status == 'loss' %}
+            <td class="loss">{{profit_loss}}</td>
+            {% endif %} {% if pl_status == 'profit' %}
+            <td class="profit">{{profit_loss}}</td>
+            {% endif %}
         </tr>
     </table>
 

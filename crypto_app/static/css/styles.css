@@ -39,20 +39,32 @@ body {
     gap: 30px;
 }
 
-.error-section {
+.error-section,
+.status_table {
     width: 100%;
     max-width: 760px;
     margin: auto;
 }
 
-.status_table {
-    margin: auto;
-    width: 50vw;
-}
-
 .status_button {
     display: flex;
     justify-content: space-around;
+    margin-top: 20px;
+}
+
+.home-active,
+.purchase-active,
+.status-active {
+    background-color: var(--primary-hover);
+    border-radius: 7px;
+    padding: 3px;
+}
+
+.loss {
+    color: red;
+}
+.profit {
+    color: greenyellow;
 }
 
 @media (min-width: 768px) {

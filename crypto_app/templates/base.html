@@ -17,19 +17,19 @@
             <div class="container">My Crypto</div>
         </header>
         <nav class="container">
-            <ul>
+            <ul class="active-nav">
                 {% if page == 'home' %}
-                <li>Home</li>
+                <li class="home-active">Home</li>
                 <li><a href="/purchase">Purchase</a></li>
                 <li><a href="/status">Status</a></li>
                 {% endif %} {% if page == 'purchase' %}
                 <li><a href="/">Home</a></li>
-                <li>Purchase</li>
+                <li class="purchase-active">Purchase</li>
                 <li><a href="/status">Status</a></li>
                 {% endif %} {% if page == 'status' %}
                 <li><a href="/">Home</a></li>
                 <li><a href="/purchase">Purchase</a></li>
-                <li>Status</li>
+                <li class="status-active">Status</li>
                 {% endif %}
             </ul>
         </nav>

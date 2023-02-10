@@ -88,5 +88,10 @@ def purchased_coins():
     connect.con.close()
 
     print('this is purchased coins funct: ', result)
-    return result[0]
-    
+    print('resul type: ', result)
+
+    if result == []:
+        return ''
+    else:
+        return result
+   

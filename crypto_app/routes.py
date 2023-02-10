@@ -8,6 +8,7 @@ from crypto_app.models import *
 @app.route("/")
 def index():
     register = show_all()
+
     return render_template("index.html", data = register, page = 'home')
 
 
@@ -36,8 +37,7 @@ def purchase():
                     }
 
             if error:
-                print("Lo que recibo desde el form: ", list_request)
-                return render_template("purchase.html", page = 'purchase', alertError = error, data = {})
+                return render_template("purchase.html", page = 'purchase', alertError = error, data = list_request)
             else:
                 return render_template("purchase.html", page = 'purchase', data = list_request)
 
@@ -61,11 +61,14 @@ def purchase():
 def status():
     invested = investedMoney()
     recovered = recoveredMoney()
+    
     current_value = 0
     coins_bbdd = purchased_coins()
+    print('this should be a list: ', coins_bbdd)
+    
+    purchase_val = invested - recovered
 
     print("this is coins_bbdd", coins_bbdd)
-
 
     for coin in coins_bbdd:
         balance = crypto_balance(coin)
@@ -74,4 +77,12 @@ def status():
             current_value += balance * api_call(coin, 'EUR')
             print("this is current value ", current_value)
 
-    return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered, current_value = current_value)
+    print(current_value)
+
+    profit_loss = current_value - purchase_val
+    if profit_loss < 0:
+        status = 'loss'
+    else:
+        status = 'profit'
+
+    return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered, purchase_value = purchase_val, current_value = current_value, profit_loss = profit_loss, pl_status = status)
