@@ -4,6 +4,17 @@ from config import *
 from datetime import datetime, date
 from crypto_app.models import *
 
+
+@app.route("/")
+def index():
+    register = show_all()
+
+    from_coin = show_all([4])
+    print(from_coin)
+
+    return render_template("index.html", data = register, page = 'home', unit_price = "")
+
+
 '''
 def validateForm(from_quantity, coin):
     error=[]
@@ -62,7 +73,7 @@ def purchase():
             ])
 
             return redirect('/')
-'''
+
 
 @app.route("/status")
 def status():
@@ -82,3 +93,4 @@ def status():
             print("this is current value ", current_value)
 
     return render_template("status.html", page = 'status', money_invested = invested, money_recovered = recovered, current_value = current_value)
+'''
