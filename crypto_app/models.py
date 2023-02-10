@@ -56,11 +56,11 @@ def recoveredMoney():
 
 
 def crypto_balance(coin):
-    connectBalancel1 = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE to_coin IS '{coin}' AND (to_coin NOT LIKE 'EUR')")
+    connectBalance1 = Conexion(f"SELECT coalesce(sum(to_quantity),0) FROM movements WHERE to_coin IS '{coin}' AND (to_coin NOT LIKE 'EUR')")
     connectBalance2 = Conexion(f"SELECT coalesce(sum(from_quantity),0) FROM movements WHERE from_coin IS '{coin}' AND (from_coin NOT LIKE 'EUR')")
-    result1 = connectBalancel1.res.fetchall()
+    result1 = connectBalance1.res.fetchall()
     result2 = connectBalance2.res.fetchall()
-    connectBalancel1.con.close()
+    connectBalance1.con.close()
     connectBalance2.con.close()
 
     balance = result1[0][0] - result2[0][0]
@@ -84,14 +84,12 @@ def validateForm(from_quantity, coin):
 
 def purchased_coins():
     connect = Conexion("SELECT DISTINCT to_coin FROM movements WHERE to_coin NOT LIKE 'EUR'")
-    result = connect.res.fetchall()
+    result = [r[0] for r in connect.res]
     connect.con.close()
 
-    print('this is purchased coins funct: ', result)
-    print('resul type: ', result)
+    print('this is what purchased_coins returns: ', result)
 
     if result == []:
         return ''
     else:
         return result
-   

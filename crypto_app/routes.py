@@ -15,7 +15,7 @@ def index():
 @app.route("/purchase", methods = ["GET", "POST"])
 def purchase():
     if request.method == "GET":
-        return render_template("purchase.html", page = 'purchase', data = {})
+        return render_template("purchase.html", page = 'purchase', data = {}, purchase_error = 'bt_enable')
 
     else:
         if 'calculate' in request.form:
@@ -23,10 +23,9 @@ def purchase():
             from_quantity= float(request.form['from_quantity'])
             to_coin= request.form['to_coin']
             coin_rate = api_call(from_coin, to_coin)
-            to_quantity = coin_rate * from_quantity
-            
-            error = validateForm(from_quantity, from_coin)
+            to_quantity = coin_rate * from_quantity 
 
+            error = validateForm(from_quantity, from_coin)
 
             list_request = {
                     'from_coin': from_coin,
@@ -37,9 +36,9 @@ def purchase():
                     }
 
             if error:
-                return render_template("purchase.html", page = 'purchase', alertError = error, data = list_request)
+                return render_template("purchase.html", page = 'purchase', alertError = error, data = list_request, purchase_error = 'bt_disable')
             else:
-                return render_template("purchase.html", page = 'purchase', data = list_request)
+                return render_template("purchase.html", page = 'purchase', data = list_request, purchase_error = 'bt_enable')
 
         if 'buy' in request.form:
 
@@ -61,14 +60,10 @@ def purchase():
 def status():
     invested = investedMoney()
     recovered = recoveredMoney()
-    
     current_value = 0
     coins_bbdd = purchased_coins()
-    print('this should be a list: ', coins_bbdd)
-    
-    purchase_val = invested - recovered
 
-    print("this is coins_bbdd", coins_bbdd)
+    purchase_val = invested - recovered
 
     for coin in coins_bbdd:
         balance = crypto_balance(coin)
@@ -76,8 +71,6 @@ def status():
         if balance > 0:
             current_value += balance * api_call(coin, 'EUR')
             print("this is current value ", current_value)
-
-    print(current_value)
 
     profit_loss = current_value - purchase_val
     if profit_loss < 0:

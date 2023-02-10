@@ -51,7 +51,12 @@
             <label for="unit_price">Unit price:</label>
             <input type="" id="unit_price" name="unit_price" readonly value={{data.unit_price}}>
             
+            {% if purchase_error == 'bt_disable' %}
+            <button type="submit" id="buy_button" name="buy" disabled>Buy</button>
+            {% endif %}
+            {% if purchase_error == 'bt_enable' %}
             <button type="submit" id="buy_button" name="buy">Buy</button>
+            {% endif %}
         </fieldset>
 
     </form>

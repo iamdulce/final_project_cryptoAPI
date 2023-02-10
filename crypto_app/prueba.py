@@ -71,7 +71,7 @@ def status():
     current_value = 0
     coins_bbdd = purchased_coins()
 
-    print("this is coins_bbdd", coins_bbdd)
+    print("this is my variable (should be the list): " , coins_bbdd)
 
 
     for coin in coins_bbdd:
