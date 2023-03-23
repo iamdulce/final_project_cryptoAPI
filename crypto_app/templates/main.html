@@ -17,9 +17,120 @@
             <div class="container">My Crypto</div>
         </header>
 
-        <section class="container">
-            <h2>Aquí va el cuadro con registros</h2>
-        </section>
+        <main class="container">
+            <section class="container">
+                <div id="movements_list">
+                    <table role="grid" id="movements_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>From</th>
+                                <th>Money Invested</th>
+                                <th>To</th>
+                                <th>Money received</th>
+                                <th>Unit price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <article id="new_movement">
+                    <form action="/purchase" method="post" id="coins_form" class="coins_form">
+                        <fieldset class="wrapper">
+                            <label for="from_coin">From</label>
+                            <select id="from_coin" name="from_coin" form="coins_form" value=>
+                                <option selected disabled>--Select a coin--</option>
+                                <option>EUR</option>
+                                <option>ETH</option>
+                                <option>BNB</option>
+                                <option>ADA</option>
+                                <option>DOT</option>
+                                <option>BTC</option>
+                                <option>USDT</option>
+                                <option>XRP</option>
+                                <option>SOL</option>
+                                <option>MATIC</option>
+                            </select>
+        
+                            <label for="to_coin">To:</label>
+                            <select id="to_coin" name="to_coin" form="coins_form" value="">
+                                <option selected disabled>--Select a coin--</option>
+                                <option>EUR</option>
+                                <option>ETH</option>
+                                <option>BNB</option>
+                                <option>ADA</option>
+                                <option>DOT</option>
+                                <option>BTC</option>
+                                <option>USDT</option>
+                                <option>XRP</option>
+                                <option>SOL</option>
+                                <option>MATIC</option>
+                            </select>
+                    
+                            <label for="from_quantity">Money to invest:</label>
+                            <div class="box-form">
+                                <input type="number" id="from_quantity" name="from_quantity" value="" placeholder ="Enter amount" step="0.01" required>
+                        
+                                <button type="submit" id="calculate_button" name="calculate"  class="calculate_button"">
+                                    <span class="material-symbols-outlined"> calculate </span>
+                                </button>
+                            </div>
+                        </fieldset>
+    
+                        <fieldset class="wrapper">
+                            <label for="to_quantity">Money to receive:</la>
+                            <input type"" id="to_quantity" name="to_quantity" readonly value="">
+                
+                            <label for="unit_price">Unit price:</label>
+                            <input type="" id="unit_price" name="unit_price" readonly value="">
+                
+                            <button type="submit" id="buy_button" name="buy" disabled>Buy</button>
+                        </fieldset>
+                    </form>
+                </article>
+            </section>
+    
+            <section class="container-status">
+                <table class="status_table">
+                    <tr>
+                        <th>Invested:</th>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <th>Recovered:</th>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <th>Purchase value:</th>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <th>Current value:</th>
+                        <td></td>
+                    </tr>
+    
+                    <tr>
+                        <th>Profit/Loss Status</th>
+                        <td class="loss"></td>
+                    </tr>
+                </table>
+            </section>
+        </main> 
 
         <footer>
             <div class="container">&copy; 2022 - DF</div>
